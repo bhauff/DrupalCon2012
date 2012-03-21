@@ -1,0 +1,110 @@
+h1. Drupal Media
+
+* Goals
+** Files as fieldable entities
+*** Add a date field to the file
+** WYSIWYG integration
+*** Allow media to be embedded anywhere there is a textfield
+** Views integration
+* Versions
+** 1.x is feature locked
+*** Will not get new features
+** 2.x is the hot sauce
+*** Views
+*** Customize the UI
+*** Is used in production at Palantir
+* Media Stack
+** File entity module
+*** Provides bonus on top of core, like Fields on files
+*** Viewing, editing, and deleting files
+*** Managing fields and their display on file types
+*** Currently can't edit file types
+*** Currently doesn't provide an access API
+*** Performance is bad
+** Media module
+*** Widgets
+*** UI
+*** Unified UI for managing Drupal files
+*** Upload new files
+*** Mass import
+*** Integrates with WYSIWYG
+*** No way to display audio and video currently (oEmbed, MediaElement)
+* Demo
+** Add file field to content type (should work with Image field as well)
+** Select Media file selector widget
+** Remember to configure display and gear settings (on Manage Display) for how to view
+** Check out is Media/WYSIWYG integration works with TinyMCE
+** Might be able to leverage Media in WYSIWYG
+* File types
+** Manage them under Structure -> File Types
+** Add fields, setup view modes
+** This could allow captions and descriptions for images
+** Fields stay with the media where ever it may be used
+** Make sure to use File Lock module with Media (Andy)
+
+h1. Making Modules for Entities and Fields
+
+* If you have @node@ anywhere in your module it will likely not work well with other entity based modules
+* Three things to call if you are saving a field without going through the node save
+* Entity Forms Module
+* Simple Fields Module
+* Entity Reference Module
+
+h1. Maestro
+
+* Add Notifications patch to Issue Queue
+* Rules integration is now landing
+* Always remember that the queueID can get you back in to the flow
+** Use the hook_form_alter to add the queueID and a "Save and Complete Task" and a callback
+** The callback can use the queueID to complete the task
+
+h1. Configuration
+
+* Features was not meant to be configuration management, it was meant to be on top of it
+* Provides a D8 like system where there is an Active Store and a Data Store
+** When you push a configuration to a new site you will be required to activate it
+** Configuration is a just a set of files, not a module
+* There are two flows
+** Dev -> Stage -> Prod
+** Site A -> Site Z (save work by applying content from one site to another)
+* Very alpha
+** Looking for feedback
+* Features is for things you want to turn on and off
+* Configuration is for things that just need to be setup
+* This mirrors D8 in many ways
+
+h1. Webform
+
+* Many to few way to collect data
+* HTML5 friendly-elements
+* Can use quirksmode for browser based email address validation
+* Conditional logic (Conditional Rules - only on multiple page forms)
+** Webform Conditional module allows on single page forms, will be integrated
+* Form Builder Integration
+** Drag / Drop creation
+** Webform Components must implement some stuff to work here
+* Tips
+** Make selections friendly with Options Element
+** %server[HTTP_REFERER] can be set as a default value in a hidden field, good for tracking a feedback on a page (what page were they on)
+*** Use the secure value setting in Hidden type (recent feature)
+** Use %get[foo] token to grab values from the url to set as default values
+** Use MIME Mail
+*** Uploaded files on the webform can be sent as attachments on the email
+* webform.com is Webform as a service
+** Will help promote and support Webform development
+* Drush submission export is coming
+
+h1. Takeaways
+
+* Media
+** Media module can provide a caption / title for images
+** Media can provide a library of uploaded images to select from (logos, top of page images for sections)
+** Media Crop module can do in browser cropping
+* Maestro now supports Rules, which can set variables and kick off a workflow
+
+h1. Misc
+
+* Node Embed
+* Devel Switch User
+* Features Overrides
+* Features Tools
