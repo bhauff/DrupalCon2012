@@ -1,0 +1,133 @@
+h1. Drupal Commerce
+
+* Freestyle, unconstrained approach to e-commerce
+* Large use of Rules, Views, Entities, and References
+* Need to focus on documentation
+** DrupalCommerce.org
+* Commerce Kickstart Drupal Installation Profile
+** Provides everything installed and configured
+* Features
+** Product Attributes are fields
+*** A product can be selected on the backend through a form just providing field widgets
+*** The combination of the selected attributes selects the appropriate product
+** Fields on a line item allow personalization of products (like name for engraving on an iPod)
+** The cart is a view
+** Checkout is built through a drag and drop form builder
+** Shipping module allows any number of flat rate shipping services
+** Use Rules to determine is shipping should be free based on cart attributes
+** Auto account creation for anonymous
+*** Since everything happens through Rules you can change all of this by just disabling a rule
+* Tech Demo
+** Price field for line item
+*** Include field on add to cart form checkbox
+** Need to tell the system to use the donation field in the product pricing rule
+*** "Calculating the sale price of a line item"
+* Bulk add product module to help easily create all of the skis based on product attributes
+
+h1. Omega
+
+* The starting documentation point: http://drupal.org/node/819164
+* Delta inheritance is currently broken, looking to change it to work like views overrides
+* Turn off debugging blocks right away!
+* Create a subtheme of Omega
+
+h1. View Modes
+
+* Theme faster
+* Write less PHP
+* Easily reusable layouts
+* Named ways of displaying Entities
+** "Full"
+** "Photo Teaser"
+** "Subtitle Teaser"
+** Different displays of the same node
+* Core
+* Work well with Views
+* Built in to all Entities
+* Too many templates, @template.php@ is out of control, using views to do theming
+* Built-in include Default and Teaser for Nodes
+* full, RSS, search index, search results
+* Manage Display
+** Custom Display Settings
+* All node types in one template
+* Entity View Mode
+** Simple, lightweight way to define additional view modes
+** Not good for Features
+* Display Suite
+** Better exporting in Features
+** Huge module
+* Defining View Modes in Code
+** @hook_entity_info_alter@
+* Per View Mode you can completely customize Manage Display
+* Field Group can be used to then group the View Modes fields
+* Node Reference
+** Settings allow you to select the View Mode (Gear Box)
+* Views
+** Display Content not Fields
+** Select the View Mode
+* Search results is a View Mode
+* Search index is a View Mode
+* Consistent design is important
+** Grid based
+** Repeating
+* http://bit.ly/view-modes
+
+h1. Migrate
+
+* Powerful object oriented framework for moving content in to Drupal
+* Migrate 2.0
+** Migrate Extras
+** @beer.inc@ and @wine.inc@ are the most comprehensive examples
+* Creates one destination record for each source record
+* Keeps track of the original ids/keys so that a migration can be re-run or rolled back
+* In Practice
+** Create a new module so you can enable, run, and then disable
+** Implement @hook_migrate_api@ in the @.module@ file
+** Create a class that extends Migration
+** Setup a source and a destination
+** Check the slides for all of the code examples
+*** http://denver2012.drupal.org/sites/default/files/Migrate.key
+
+h1. Entities
+
+* Fields everywhere
+* Bundles
+** Subtype of Entity
+** Entity type -> Node / Bundle -> Node type
+** Entity type -> Taxonomy term / Bundle -> Vocabulary
+* Shift from Node modules to Entity modules
+* Unified way to access data
+** i.e. Rules -> Entities -> (Comment, Node, User, Profile, Product)
+* Interacting with Entities
+** Entity API module
+** @entity_metadata_wrapper@
+* Property Info
+** Validation
+** Access Information
+* Providing an Entity Type
+** Implemente @hook_entity_info@
+** Specify 'controller class'
+** Implement @hook_schema@
+* Profile2 is an example
+* Remote entities are possible
+** NoSQL, Doctrine, PHPCR
+** Non-database entities + fields?
+*** Fields will be stored in the local Drupal database
+* http://drupal.org/sandbox/fago/1493180
+* Remote Entities can have non-integer ids if they are not fieldable
+
+h1. Takeaways
+
+* Like Drupal, the Commerce is a box of legos to build a super flexible system
+
+h1. Misc
+
+* Entity Reference
+* Flex Slider is the slider to use in Omega
+* Orbit slider
+* Display Suite
+* BEANs (Custom Block Entities
+** Easily create many blocks with custom code???
+* WYSIWYG Fields
+** http://denver2012.drupal.org/bof/fields-wysiwyg-wysiwyg-fields
+* Rules Links
