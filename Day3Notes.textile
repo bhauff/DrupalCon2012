@@ -1,0 +1,89 @@
+h1. Views
+
+* http://tinyurl.com/views3-for-devs
+* Tables header for View/Edit links - "Actions"
+* Views that only have one item can be quite useful
+* Use style settings to customize the HTML
+** You can turn off a lot of the markup so many of the wrappers go away
+** Use view modes to provide consistent markup for elements, rather than duplicating settings across many views
+* Links
+** Link this field to the original piece of content
+** Output field as link, and set custom path
+* Summary Views
+** Use a contextual filter
+** Quick way to make a list to other views
+* AND/OR Filters
+** Create groups of filters, and then the groups can be AND'D or OR'D
+** Configure contextual filters
+*** Will always be set in the first group (will not show up in the UI)
+* Result Summaries
+** Displaying 1-7 of 7 (in Display settings)
+** With area plugin you can display them in header etc.
+* Aggregate Count queries
+** Use aggregation YES (Adv. Settings)
+** COUNT(Content) | Aggregation settings (Sort Criteria)
+* Alternative Pagers
+** i.e. Page by Date
+* Views Link Area has a patch for Access Controls on Links!!! (Go review it)
+* Custom Code
+** http://api.drupal.org/api/views/groups
+** http://drupal.geek.nz/views
+** Implement @hook_views_api()@
+*** Which api
+*** Path to code
+** Create subclass of appropriate Views class
+** Tell Drupal about the class/include in the *.info file
+** @views_linkarea@ is a great example
+** Expose the class via @hook_views_data()@
+*** Define the handler
+** @views_plugin_*@ directly relate to the Views UI
+*** i.e. @views_plugin_display@ holds the code responsible for providing the Displays
+*** In documentation @Class Hierarchy -> views_objects -> views_plugin -> …@
+* Handler vs. Plugin
+** Views must have one of each plugin, and it can have zero or more handlers
+* Enable Core Search module, and then you can add a Full text search Filter
+
+h1. EntityFieldQuery
+
+* If you declare a class in an @*.info@ it will be autoloader, so it is available wherever you want to use it
+* Could create @BuckleStore@ class that is a subclass of the EntityFieldQuery
+** @class NodeEntityFieldQuery extends EntityFieldQuery {}@
+** Add lots of functionality like merging in data from the AS400
+*** http://treehouseagency.com/blog/tim-cosgrove/2012/02/16/entityfieldquery-let-drupal-do-heavy-lifting-pt-1
+*** http://treehouseagency.com/blog/tim-cosgrove/2012/02/28/entityfieldquery-let-drupal-do-heavy-lifting-pt-2
+** You can setup these queries to use different View Modes as the entities are loaded
+*** @$nodes = node_load_multiple($nids);@
+*** @$output = node_view_multiple($nodes);@
+* You can add tags to a query
+** http://api.drupal.org/api/drupal/includes!entity.inc/property/EntityFieldQuery%3A%3Atags/7
+** There is a hook that can then only be triggered when certain tags are present
+*** http://api.drupal.org/api/drupal/includes!entity.inc/function/EntityFieldQuery%3A%3AaddTag/7
+*** http://api.drupal.org/api/drupal/modules!system!system.api.php/function/hook_query_TAG_alter/7
+* Extend your class with SelectFieldQuery methods, and they just work because EntityFieldQuery extends SelectFieldQuery
+
+h1. Beans
+
+* Block Entities Aren't Nodes
+* http://drupal.org/project/bean
+** There are BEAN examples on the project page
+* These replace custom blocks in D7
+** They will be core in D8
+* These blocks have View Modes
+* Block References Module
+* @hook_beans_types()@
+* Use the bean_examples module for code
+* http://drupal.org/sandbox/brantwynn/1376658
+* http://www.archive.org/details/DrupalBeanModuleTutorial-UsingBeanAdminUiAndWritingBeanPlugins-
+
+h1. Takeaways
+
+* Create Nodes that represent landing pages
+** Add fields that are block references
+*** BEANs are Block Entities
+** Treehouse build Energy.gov thisway
+
+h1. Misc
+
+* Fences
+* LayoutManager
+* Attachment Views
